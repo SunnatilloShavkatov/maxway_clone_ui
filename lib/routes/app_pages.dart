@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:maxway_clone/pages/main/home/product/lottie_page.dart';
+import 'package:maxway_clone/pages/main/home/product/product_page.dart';
 import 'package:maxway_clone/pages/main/main_page.dart';
 import 'package:maxway_clone/pages/main/profile/edit_profile/edit_profile_page.dart';
 import 'package:maxway_clone/pages/main/profile/settings/settings_page.dart';
@@ -13,5 +15,7 @@ class AppPages {
     AppRoutes.main: (context) => const MainPage(),
     AppRoutes.settings: (context) => const SettingsPage(),
     AppRoutes.editProfile: (context) => const EditProfilePage(),
+    AppRoutes.product: (context) => const ProductPage(),
+    AppRoutes.lottie: (context) => const LottiePage(),
   };
 }

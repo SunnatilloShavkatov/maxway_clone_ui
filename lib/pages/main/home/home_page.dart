@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:maxway_clone/core/theme/theme_text_styles.dart';
+import 'package:maxway_clone/routes/app_routes.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List bannersImage = [
+    "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+    "https://thumbs.dreamstime.com/b/beautiful-sunset-over-water-tree-silhouette-nature-landscape-amazing-orange-yellow-sky-night-scene-wallpaper-birds-flying-154424473.jpg",
+    "https://thumbs.dreamstime.com/b/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg",
+    "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80"
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        title: const Padding(
-          padding: EdgeInsets.only(bottom: 8),
+        title: Padding(
+          padding: const EdgeInsets.only(bottom: 8),
           child: TextField(
-            decoration: InputDecoration(
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.lottie);
+            },
+            decoration: const InputDecoration(
               hintText: 'Search',
               border: InputBorder.none,
               prefixIcon: Icon(Icons.search),
@@ -58,19 +74,31 @@ class HomePage extends StatelessWidget {
               child: ListView.separated(
                 padding: const EdgeInsets.all(12),
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (_, __) {
-                  return ClipRRect(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(12),
-                    ),
-                    child: Image.network(
-                      "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/delicious-food-banner-template-design-cd3994e39458960f4f33e73b8c60edb9_screen.jpg?ts=1645769305",
-                      fit: BoxFit.fitWidth,
+                itemBuilder: (_, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.product,
+                        arguments: bannersImage[index],
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                      child: Hero(
+                        tag: bannersImage[index],
+                        child: Image.network(
+                          bannersImage[index],
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
                     ),
                   );
                 },
                 separatorBuilder: (_, __) => const SizedBox(width: 8),
-                itemCount: 6,
+                itemCount: bannersImage.length,
               ),
             ),
           ),
